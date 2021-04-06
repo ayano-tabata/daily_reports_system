@@ -37,7 +37,9 @@ public class EmployeesIndexServlet extends HttpServlet {
         int page = 1;
         try{
             page = Integer.parseInt(request.getParameter("page"));
-        }catch(NumberFormatException e){}
+        }catch(Exception e){
+            page = 1;
+        }
 
         List<Employee> employees = em.createNamedQuery("getAllEmployees", Employee.class)
                                      .setFirstResult(15 * (page - 1))
