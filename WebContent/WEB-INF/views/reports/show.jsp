@@ -37,6 +37,15 @@
                     </tr>
                 </tbody>
             </table>
+            <br />
+            <c:if test="${sessionScope.login_employee.admin_flag == employee.admin_flag + 1
+                       && sessionScope.login_employee.department == employee.department}">
+                <form method="POST" action="<c:url value='/reports/approve' />">
+                    <input type="hidden" name="_token" value="${_token}" />
+                    <input type="submit" value="承認">
+                </form>
+            </c:if>
+
 
             <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                 <p><a href="<c:url value='/reports/edit?id=${report.id}' />">この日報を編集する</a></p>

@@ -13,12 +13,23 @@
                 <tr>
                     <th>社員番号</th>
                     <th>氏名</th>
+                    <th>部門</th>
                     <th>操作</th>
                 </tr>
                 <c:forEach var="employee" items="${employees}" varStatus="status">
                     <tr class="row${stasus.count % 2}">
                         <td><c:out value="${employee.code}"/></td>
                         <td><c:out value="${employee.name}"/></td>
+                        <td>
+                            <c:choose>
+                                    <c:when test="${employee.department == 0}">総務部</c:when>
+                                    <c:when test="${employee.department == 1}">フロント部</c:when>
+                                    <c:when test="${employee.department == 2}">予約部</c:when>
+                                    <c:when test="${employee.department == 3}">接客部</c:when>
+                                    <c:when test="${employee.department == 4}">調理部</c:when>
+                                    <c:when test="${employee.department == 5}">庶務部</c:when>
+                            </c:choose>
+                        </td>
                         <td>
                             <c:choose>
                                 <c:when test="${employee.delete_flag  == 1}">

@@ -46,9 +46,10 @@ public class ReportsUpdateServlet extends HttpServlet {
             r.setCategory(Integer.parseInt(request.getParameter("category")));
             r.setContent(request.getParameter("content"));
 
-            r.setApprove_flag(Integer.parseInt(request.getParameter("approve_flag")));
-            r.setShare_flag(Integer.parseInt(request.getParameter("share_flag")));
-            r.setImportance(Integer.parseInt(request.getParameter("importance")));
+            //編集したため再度承認・公開範囲/重要度の設定
+            r.setApprove_flag(0);
+            r.setShare_flag(0);
+            r.setImportance(0);
 
             r.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
