@@ -20,10 +20,23 @@
 <input type="password" name="password" />
 <br /><br />
 
+<label for="department">部門</label><br />
+<select name="department">
+    <option value="0"<c:if test="${employee.department == 0}"> selected</c:if>>総務部</option>
+    <option value="1"<c:if test="${employee.department == 1}"> selected</c:if>>フロント部</option>
+    <option value="2"<c:if test="${employee.department == 2}"> </c:if>>予約部</option>
+    <option value="3"<c:if test="${employee.department == 3}"> selected</c:if>>接客部</option>
+    <option value="4"<c:if test="${employee.department == 4}"> selected</c:if>>調理部</option>
+    <option value="5"<c:if test="${employee.department == 5}"> selected</c:if>>庶務部</option>
+</select>
+<br /><br />
+
 <label for="admin_flag">権限</label><br />
 <select name="admin_flag">
-    <option value="0"<c:if test="${employee.admin_flag == 0}"> selected</c:if>>一般</option>
-    <option value="1"<c:if test="${employee.admin_flag == 1}"> selected</c:if>>管理者</option>
+    <option value="0"<c:if test="${employee.admin_flag == 0}"> selected</c:if>>社員</option>
+    <option value="1"<c:if test="${employee.admin_flag == 1}"> selected</c:if>>課長</option>
+    <option value="2"<c:if test="${employee.admin_flag == 2}"> selected</c:if>>部長</option>
+    <option value="3"<c:if test="${employee.admin_flag == 3}"> selected</c:if>>女将</option>
 </select>
 <br /><br />
 
