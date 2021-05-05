@@ -57,7 +57,7 @@ public class ReportsCreateServlet extends HttpServlet {
 
             //デフォルトで未承認・公開範囲/重要度未設定
             r.setApprove_flag(0);
-            r.setShare_flag(0);
+            r.setShare_flag(4);
             r.setImportance(0);
 
 

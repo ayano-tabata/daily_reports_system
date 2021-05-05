@@ -14,16 +14,16 @@ import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsApproveServlet
+ * Servlet implementation class ReportsShareServlet
  */
-@WebServlet("/reports/approve")
-public class ReportsApproveServlet extends HttpServlet {
+@WebServlet("/reports/share")
+public class ReportsShareImportanceServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsApproveServlet() {
+    public ReportsShareImportanceServlet() {
         super();
     }
 
@@ -36,18 +36,20 @@ public class ReportsApproveServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
 
             Report r = em.find(Report.class, (Integer)(request.getSession().getAttribute("report_id")));
-            r.setApprove_flag(1);
+
+            r.setShare_flag(Integer.parseInt(request.getParameter("share_flag")));
+            r.setImportance(Integer.parseInt(request.getParameter("importance")));
             r.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
             em.getTransaction().begin();
             em.getTransaction().commit();
             em.close();
 
-            request.getSession().setAttribute("flush", "承認が完了しました。");
+            request.getSession().setAttribute("flush", "公開範囲・重要度を設定しました。");
 
             request.getSession().removeAttribute("report_id");
+
             response.sendRedirect(request.getContextPath() + "/reports/index");
         }
     }
-
 }

@@ -48,7 +48,7 @@ public class ReportsUpdateServlet extends HttpServlet {
 
             //編集したため再度承認・公開範囲/重要度の設定
             r.setApprove_flag(0);
-            r.setShare_flag(0);
+            r.setShare_flag(4);
             r.setImportance(0);
 
             r.setUpdated_at(new Timestamp(System.currentTimeMillis()));
