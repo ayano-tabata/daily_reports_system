@@ -51,9 +51,21 @@ public class Report {
     @Column(name = "title", length = 255, nullable = false)
     private String title;
 
+    @Column(name = "category", nullable = false)
+    private Integer category;
+
     @Lob
     @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "approve_flag", nullable = false)
+    private Integer approve_flag;
+
+    @Column(name = "share_flag", nullable = false)
+    private Integer share_flag;
+
+    @Column(name = "importance", nullable = false)
+    private Integer importance;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
@@ -93,12 +105,44 @@ public class Report {
         this.title = title;
     }
 
+    public Integer getCategory() {
+        return category;
+    }
+
+    public void setCategory(Integer category) {
+        this.category = category;
+    }
+
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getApprove_flag() {
+        return approve_flag;
+    }
+
+    public void setApprove_flag(Integer approve_flag) {
+        this.approve_flag = approve_flag;
+    }
+
+    public Integer getShare_flag() {
+        return share_flag;
+    }
+
+    public void setShare_flag(Integer share_flag) {
+        this.share_flag = share_flag;
+    }
+
+    public Integer getImportance() {
+        return importance;
+    }
+
+    public void setImportance(Integer importance) {
+        this.importance = importance;
     }
 
     public Timestamp getCreated_at() {
