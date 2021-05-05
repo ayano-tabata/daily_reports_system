@@ -43,7 +43,13 @@ public class ReportsUpdateServlet extends HttpServlet {
 
             r.setReport_date(Date.valueOf(request.getParameter("report_date")));
             r.setTitle(request.getParameter("title"));
+            r.setCategory(Integer.parseInt(request.getParameter("category")));
             r.setContent(request.getParameter("content"));
+
+            r.setApprove_flag(Integer.parseInt(request.getParameter("approve_flag")));
+            r.setShare_flag(Integer.parseInt(request.getParameter("share_flag")));
+            r.setImportance(Integer.parseInt(request.getParameter("importance")));
+
             r.setUpdated_at(new Timestamp(System.currentTimeMillis()));
 
             List<String> errors = ReportValidator.validate(r);

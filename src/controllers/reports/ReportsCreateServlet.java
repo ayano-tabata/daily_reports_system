@@ -52,7 +52,14 @@ public class ReportsCreateServlet extends HttpServlet {
             r.setReport_date(report_date);
 
             r.setTitle(request.getParameter("title"));
+            r.setCategory(Integer.parseInt(request.getParameter("category")));
             r.setContent(request.getParameter("content"));
+
+            //デフォルトで未承認・公開範囲/重要度未設定
+            r.setApprove_flag(0);
+            r.setShare_flag(0);
+            r.setImportance(0);
+
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             r.setCreated_at(currentTime);
