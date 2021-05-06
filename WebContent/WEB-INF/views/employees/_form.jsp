@@ -24,7 +24,7 @@
 <select name="department">
     <option value="0"<c:if test="${employee.department == 0}"> selected</c:if>>総務部</option>
     <option value="1"<c:if test="${employee.department == 1}"> selected</c:if>>フロント部</option>
-    <option value="2"<c:if test="${employee.department == 2}"> </c:if>>予約部</option>
+    <option value="2"<c:if test="${employee.department == 2}"> selected </c:if>>予約部</option>
     <option value="3"<c:if test="${employee.department == 3}"> selected</c:if>>接客部</option>
     <option value="4"<c:if test="${employee.department == 4}"> selected</c:if>>調理部</option>
     <option value="5"<c:if test="${employee.department == 5}"> selected</c:if>>庶務部</option>

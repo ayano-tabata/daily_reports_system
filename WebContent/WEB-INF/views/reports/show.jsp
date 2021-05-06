@@ -18,6 +18,18 @@
                         <td><fmt:formatDate value="${report.report_date}" pattern="yyyy-MM-dd" /></td>
                     </tr>
                     <tr>
+                        <th>種別</th>
+                        <td class="report_category">
+                            <c:choose>
+                                <c:when test="${report.category == 0}">お客様情報</c:when>
+                                <c:when test="${report.category == 1}">メンテナンス情報</c:when>
+                                <c:when test="${report.category == 2}">イベント情報</c:when>
+                                <c:when test="${report.category == 3}">クレーム</c:when>
+                                <c:when test="${report.category == 4}">その他</c:when>
+                            </c:choose>
+                        </td>
+                    </tr>
+                    <tr>
                         <th>内容</th>
                         <td>
                             <pre><c:out value="${report.content}" /></pre>

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Employee;
 import models.Report;
 import utils.DBUtil;
 
@@ -40,24 +42,36 @@ public class ReportsIndexServlet extends HttpServlet {
         }catch(Exception e){
             page = 1;
         }
-        List<Report> reports = em.createNamedQuery("getAllReports", Report.class)
-                                 .setFirstResult(15 * (page - 1))
-                                 .setMaxResults(15)
-                                 .getResultList();
-        long reports_count = (long)em.createNamedQuery("getReportsCount", Long.class)
-                                       .getSingleResult();
-        em.close();
 
-        request.setAttribute("reports", reports);
-        request.setAttribute("reports_count", reports_count);
-        request.setAttribute("page", page);
-        if(request.getSession().getAttribute("flush") != null){
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
-        }
+        Employee emp = (Employee)request.getSession().getAttribute("login_employee");
 
-        RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/reports/index.jsp");
-        rd.forward(request, response);
+        int admin_flag = emp.getAdmin_flag();
+
+        try{
+            List<Report> reports = em.createNamedQuery("getIndexReports", Report.class)
+                                      .setParameter("admin_flag", admin_flag)
+                                      .setFirstResult(15 * (page - 1))
+                                      .setMaxResults(15)
+                                      .getResultList();
+            long reports_count = (long)em.createNamedQuery("getIndexCount", Long.class)
+                                           .setParameter("admin_flag", admin_flag)
+                                           .getSingleResult();
+
+            em.close();
+
+            request.setAttribute("reports", reports);
+            request.setAttribute("reports_count", reports_count);
+            request.setAttribute("page", page);
+
+            if(request.getSession().getAttribute("flush") != null){
+                request.setAttribute("flush", request.getSession().getAttribute("flush"));
+                request.getSession().removeAttribute("flush");
+            }
+
+
+            RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/reports/index.jsp");
+            rd.forward(request, response);
+        }catch(NoResultException e){}
     }
 
 }

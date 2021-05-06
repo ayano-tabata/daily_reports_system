@@ -15,6 +15,8 @@
                     <th class="report_name">氏名</th>
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
+                    <th class="report_category">種別</th>
+                    <th class="report_importance">重要度</th>
                     <th class="report_action">操作</th>
                 </tr>
                 <c:forEach var="report" items="${reports}" varStatus="status">
@@ -22,6 +24,22 @@
                         <td class="report_name"><c:out value="${report.employee.name}" /></td>
                         <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
+                        <td class="report_category">
+                            <c:choose>
+                                <c:when test="${report.category == 0}">お客様情報</c:when>
+                                <c:when test="${report.category == 1}">メンテナンス情報</c:when>
+                                <c:when test="${report.category == 2}">イベント情報</c:when>
+                                <c:when test="${report.category == 3}">クレーム</c:when>
+                                <c:when test="${report.category == 4}">その他</c:when>
+                            </c:choose>
+                        </td>
+                        <td class="report_importance">
+                            <c:choose>
+                                <c:when test="${report.importance == 0}">未設定</c:when>
+                                <c:when test="${report.importance == 1}">低</c:when>
+                                <c:when test="${report.importance == 2}">高</c:when>
+                            </c:choose>
+                        </td>
                         <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}'/>">詳細</a></td>
                     </tr>
                 </c:forEach>

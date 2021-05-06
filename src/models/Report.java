@@ -18,12 +18,12 @@ import javax.persistence.Table;
 @Table(name = "reports")
 @NamedQueries({
     @NamedQuery(
-            name = "getAllReports",
-            query = "SELECT r FROM Report AS r ORDER BY r.id DESC"
+            name = "getIndexReports",
+            query = "SELECT r FROM Report AS r WHERE r.share_flag <= :admin_flag  ORDER BY r.importance DESC"
             ),
     @NamedQuery(
-            name = "getReportsCount",
-            query = "SELECT COUNT(r) FROM Report AS r"
+            name = "getIndexCount",
+            query = "SELECT COUNT(r) FROM Report AS r WHERE r.share_flag <= :admin_flag"
             ),
     @NamedQuery(
             name = "getMyAllReports",
@@ -35,7 +35,7 @@ import javax.persistence.Table;
             ),
     @NamedQuery(
             name = "getUnapprovedReports",
-            query = "SELECT r FROM Report AS r WHERE r.approve_flag = 0 OR r.share_flag = 4 ORDER BY r.id DESC"
+            query = "SELECT r FROM Report AS r WHERE r.approve_flag = 0 OR r.share_flag = 4 OR r.importance = 0 ORDER BY r.id DESC"
             ),
     @NamedQuery(
             name = "getUnapprovedReportsCount",
