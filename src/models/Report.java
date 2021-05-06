@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getIndexReports",
-            query = "SELECT r FROM Report AS r WHERE r.share_flag <= :admin_flag  ORDER BY r.importance DESC"
+            query = "SELECT r FROM Report AS r WHERE r.share_flag <= :admin_flag AND r.approve_flag = 1 ORDER BY r.importance DESC"
             ),
     @NamedQuery(
             name = "getIndexCount",

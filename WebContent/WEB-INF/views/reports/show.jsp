@@ -19,7 +19,7 @@
                     </tr>
                     <tr>
                         <th>種別</th>
-                        <td class="report_category">
+                        <td>
                             <c:choose>
                                 <c:when test="${report.category == 0}">お客様情報</c:when>
                                 <c:when test="${report.category == 1}">メンテナンス情報</c:when>
@@ -34,6 +34,26 @@
                         <td>
                             <pre><c:out value="${report.content}" /></pre>
                         </td>
+                    </tr>
+                    <tr>
+                        <th>公開範囲</th>
+                        <td>
+                            <c:choose>
+                                <c:when test="${report.share_flag == 0}">全体公開</c:when>
+                                <c:when test="${report.share_flag == 1}">課長以上</c:when>
+                                <c:when test="${report.share_flag == 2}">部長以上</c:when>
+                                <c:when test="${report.share_flag == 3}">女将のみ</c:when>
+                                <c:when test="${report.share_flag == 4}">未設定</c:when>
+                            </c:choose>
+                    </tr>
+                    <tr>
+                        <th>重要度</th>
+                        <td>
+                            <c:choose>
+                                <c:when test="${report.importance == 0}">未設定</c:when>
+                                <c:when test="${report.importance == 1}">低</c:when>
+                                <c:when test="${report.importance == 2}">高</c:when>
+                            </c:choose>
                     </tr>
                     <tr>
                         <th>登録日時</th>
