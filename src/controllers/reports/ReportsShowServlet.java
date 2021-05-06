@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import models.Employee;
 import models.Report;
 import utils.DBUtil;
 
@@ -35,13 +34,11 @@ public class ReportsShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Report r =em.find(Report.class, Integer.parseInt(request.getParameter("id")));
-        Employee e = r.getEmployee();
 
         em.close();
 
         request.setAttribute("report", r);
         request.setAttribute("_token", request.getSession().getId());
-        request.setAttribute("employee", e);
 
         request.getSession().setAttribute("report_id", r.getId());
 

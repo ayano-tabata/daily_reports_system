@@ -46,7 +46,7 @@ public class ReportsApproveServlet extends HttpServlet {
             request.getSession().setAttribute("flush", "承認が完了しました。");
 
             request.getSession().removeAttribute("report_id");
-            response.sendRedirect(request.getContextPath() + "/reports/index");
+            response.sendRedirect(request.getContextPath() + "/reports/unapproved");
         }
     }
 

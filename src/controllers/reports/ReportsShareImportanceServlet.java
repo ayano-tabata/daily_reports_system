@@ -49,7 +49,7 @@ public class ReportsShareImportanceServlet extends HttpServlet {
 
             request.getSession().removeAttribute("report_id");
 
-            response.sendRedirect(request.getContextPath() + "/reports/index");
+            response.sendRedirect(request.getContextPath() + "/reports/unapproved");
         }
     }
 }
