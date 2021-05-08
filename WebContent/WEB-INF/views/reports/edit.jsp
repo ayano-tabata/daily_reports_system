@@ -4,7 +4,7 @@
     <c:param name="content">
         <c:choose>
         <c:when test="${report != null}">
-            <h2>日報　編集ページ</h2>
+            <h2>報告　編集ページ</h2>
             <form method="post" action="<c:url value='/reports/update' />">
                 <c:import url="_form.jsp"/>
             </form>

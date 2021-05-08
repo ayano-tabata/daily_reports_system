@@ -8,7 +8,7 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>日報　一覧</h2>
+        <h2>報告　一覧</h2>
 
         <form method="GET" action="<c:url value='/reports/search' />">
             <select name="category">
@@ -71,7 +71,7 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
+        <p><a href="<c:url value='/reports/new' />">新規報告の登録</a></p>
 
     </c:param>
 </c:import>
