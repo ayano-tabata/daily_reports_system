@@ -17,16 +17,16 @@ import models.Report;
 import utils.DBUtil;
 
 /**
- * Servlet implementation class ReportsIndexServlet
+ * Servlet implementation class ReportsSearchServlet
  */
-@WebServlet("/reports/index")
-public class ReportsIndexServlet extends HttpServlet {
+@WebServlet("/reports/search")
+public class ReportsSearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportsIndexServlet() {
+    public ReportsSearchServlet() {
         super();
     }
 
@@ -44,16 +44,19 @@ public class ReportsIndexServlet extends HttpServlet {
         }
 
         Employee emp = (Employee)request.getSession().getAttribute("login_employee");
-
         Integer admin_flag = emp.getAdmin_flag();
 
+        Integer category = Integer.parseInt(request.getParameter("category"));
+
         try{
-            List<Report> reports = em.createNamedQuery("getIndexReports", Report.class)
-                                      .setParameter("admin_flag", admin_flag)
-                                      .setFirstResult(15 * (page - 1))
-                                      .setMaxResults(15)
-                                      .getResultList();
-            long reports_count = (long)em.createNamedQuery("getIndexCount", Long.class)
+            List<Report> reports = em.createNamedQuery("getReportsSearch", Report.class)
+                                     .setParameter("category", category)
+                                     .setParameter("admin_flag", admin_flag)
+                                     .setFirstResult(15 * (page - 1))
+                                     .setMaxResults(15)
+                                     .getResultList();
+            long reports_count = (long)em.createNamedQuery("getReportsSearchCount", Long.class)
+                                           .setParameter("category", category)
                                            .setParameter("admin_flag", admin_flag)
                                            .getSingleResult();
 
@@ -63,13 +66,7 @@ public class ReportsIndexServlet extends HttpServlet {
             request.setAttribute("reports_count", reports_count);
             request.setAttribute("page", page);
 
-            if(request.getSession().getAttribute("flush") != null){
-                request.setAttribute("flush", request.getSession().getAttribute("flush"));
-                request.getSession().removeAttribute("flush");
-            }
-
-
-            RequestDispatcher rd =request.getRequestDispatcher("/WEB-INF/views/reports/index.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/search.jsp");
             rd.forward(request, response);
         }catch(NoResultException e){}
     }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -41,26 +42,28 @@ public class ReportsUnapprovedIndexServlet extends HttpServlet {
             page = 1;
         }
 
-        List<Report> reports = em.createNamedQuery("getUnapprovedReports", Report.class)
-                                 .setFirstResult(15 * (page - 1))
-                                 .setMaxResults(15)
-                                 .getResultList();
+        try{
+            List<Report> reports = em.createNamedQuery("getUnapprovedReports", Report.class)
+                                     .setFirstResult(15 * (page - 1))
+                                     .setMaxResults(15)
+                                     .getResultList();
 
-        long reports_count = (long)em.createNamedQuery("getUnapprovedReportsCount", Long.class)
-                                      .getSingleResult();
-        em.close();
+            long reports_count = (long)em.createNamedQuery("getUnapprovedReportsCount", Long.class)
+                                          .getSingleResult();
+            em.close();
 
-        request.setAttribute("reports", reports);
-        request.setAttribute("reports_count", reports_count);
-        request.setAttribute("page", page);
+            request.setAttribute("reports", reports);
+            request.setAttribute("reports_count", reports_count);
+            request.setAttribute("page", page);
 
-        if(request.getSession().getAttribute("flush") != null){
-            request.setAttribute("flush", request.getSession().getAttribute("flush"));
-            request.getSession().removeAttribute("flush");
-        }
+            if(request.getSession().getAttribute("flush") != null){
+                request.setAttribute("flush", request.getSession().getAttribute("flush"));
+                request.getSession().removeAttribute("flush");
+            }
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/unapproved.jsp");
-        rd.forward(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/unapproved.jsp");
+            rd.forward(request, response);
+        }catch(NoResultException e){}
     }
 
 }

@@ -3,24 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
-        <c:if test="${flush != null}">
-            <div id="flush_success">
-                <c:out value="${flush}"></c:out>
-            </div>
-        </c:if>
-        <h2>日報　一覧</h2>
-
-        <form method="GET" action="<c:url value='/reports/search' />">
-            <select name="category">
-                <option value="0"<c:if test="${report.category == 0}"> selected</c:if>>お客様情報</option>
-                <option value="1"<c:if test="${report.category == 1}"> selected</c:if>>メンテナンス情報</option>
-                <option value="2"<c:if test="${report.category == 2}"> selected</c:if>>イベント情報</option>
-                <option value="3"<c:if test="${report.category == 3}"> selected</c:if>>クレーム</option>
-                <option value="4"<c:if test="${report.category == 4}"> selected</c:if>>その他</option>
-            </select>
-            <input type="submit" value="検索" />
-        </form>
-        <br />
+        <h2>検索結果</h2>
         <table id="report_list">
             <tbody>
                 <tr>
@@ -58,7 +41,7 @@
             </tbody>
         </table>
 
-        <div id="pagination">
+            <div id="pagination">
             (全 ${reports_count} 件)<br />
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / 15) + 1}" step="1">
                 <c:choose>
@@ -71,7 +54,8 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
+        <p><a href="<c:url value='/reports/index' />">一覧に戻る</a></p>
+
 
     </c:param>
 </c:import>

@@ -19,11 +19,11 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getIndexReports",
-            query = "SELECT r FROM Report AS r WHERE r.share_flag <= :admin_flag AND r.approve_flag = 1 ORDER BY r.importance DESC"
+            query = "SELECT r FROM Report AS r WHERE r.share_flag <= :admin_flag AND r.approve_flag = 1 ORDER BY r.importance DESC, r.id DESC"
             ),
     @NamedQuery(
             name = "getIndexCount",
-            query = "SELECT COUNT(r) FROM Report AS r WHERE r.share_flag <= :admin_flag"
+            query = "SELECT COUNT(r) FROM Report AS r WHERE r.share_flag <= :admin_flag AND r.approve_flag = 1"
             ),
     @NamedQuery(
             name = "getMyAllReports",
@@ -39,8 +39,19 @@ import javax.persistence.Table;
             ),
     @NamedQuery(
             name = "getUnapprovedReportsCount",
-            query = "SELECT COUNT(r) FROM Report AS r WHERE r.approve_flag = 0 OR r.share_flag = 4"
+            query = "SELECT COUNT(r) FROM Report AS r WHERE r.approve_flag = 0 OR r.share_flag = 4 OR r.importance = 0"
+            ),
+    @NamedQuery(
+            name = "getReportsSearch",
+            query = "SELECT r FROM Report AS r WHERE r.category = :category "
+                    + "AND r.share_flag <= :admin_flag AND r.approve_flag = 1 ORDER BY r.id DESC"
+            ),
+    @NamedQuery(
+            name = "getReportsSearchCount",
+            query= "SELECT COUNT(r) FROM Report AS r WHERE r.category = :category "
+                    + "AND r.share_flag <= :admin_flag AND r.approve_flag = 1"
             )
+
 })
 @Entity
 public class Report {
