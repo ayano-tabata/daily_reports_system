@@ -73,9 +73,9 @@
 
             <c:if test="${report.approve_flag == 0
                         &&((sessionScope.login_employee.admin_flag == report.employee.admin_flag + 1
-                        && sessionScope.login_employee.department == report.employee.department)
+                            && sessionScope.login_employee.department == report.employee.department)
                         || ((report.employee.admin_flag == 3 || report.employee.admin_flag == 2)
-                        && sessionScope.login_employee.admin_flag == 3))}">
+                            && sessionScope.login_employee.admin_flag == 3))}">
                 <form method="POST" action="<c:url value='/reports/approve' />">
                     <input type="hidden" name="_token" value="${_token}" />
                     <input type="submit" value="承認">
