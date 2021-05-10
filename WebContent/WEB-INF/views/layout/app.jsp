@@ -5,14 +5,15 @@
     <head>
         <meta charset="UTF-8">
         <title>報告管理システム</title>
-        <link rel="stylesheet" href="<c:url value='/css/reset.css'/>">
-        <link rel="stylesheet" href="<c:url value='/css/style.css'/>">
+        <link rel="stylesheet" href="<c:url value='/css/reset.css' />">
+        <link rel="stylesheet" href="<c:url value='/css/style.css' />">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
         <div id="wrapper">
             <div id="header">
                 <div id="header_menu">
-                    <h1><a href="<c:url value='/' />">報告管理システム</a></h1>&nbsp;&nbsp;&nbsp;
+                    <h1><a href="<c:url value='/' />">報告管理システム</a></h1>
                     <c:if test="${sessionScope.login_employee != null}">
                         <c:if test="${sessionScope.login_employee.admin_flag >= 1}">
                             <a href="<c:url value='/employees/index' />">従業員管理</a>
